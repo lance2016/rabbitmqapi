@@ -13,7 +13,7 @@ import static rabbitmq.http.api.utils.Methods.getData;
 
 public class PoliciesManagement {
     //demo
-    public static String fetchRabbtMQUsersJsonString(String url, String username, String password) throws IOException {
+    public static String fetchRabbtMQUsers(String url, String username, String password) throws IOException {
         //获取数据
         String nodeData = getData(url, username, password);
         JSONArray jsonArray = JSONObject.parseArray(nodeData) ;
@@ -41,7 +41,7 @@ public class PoliciesManagement {
 
         //获取用户信息
 
-        String strUsersList = fetchRabbtMQUsersJsonString(RABBIT_USERS_REST_URL, RABBIT_USER_NAME, RABBIT_USER_PWD);
+        String strUsersList = fetchRabbtMQUsers(RABBIT_USERS_REST_URL, RABBIT_USER_NAME, RABBIT_USER_PWD);
 
         JSONArray jsonArray = JSONArray.parseArray(strUsersList);
 
