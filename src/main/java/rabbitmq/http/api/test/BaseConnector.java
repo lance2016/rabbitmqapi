@@ -1,4 +1,4 @@
-package rabbitmq.http.api.two;
+package rabbitmq.http.api.test;
 
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
@@ -22,6 +22,8 @@ public class BaseConnector {
         factory.setPort(AMQP.PROTOCOL.PORT);
         factory.setUsername("admin");
         factory.setPassword("admin");
+//        factory.setUsername("guest");
+//        factory.setPassword("guest");
 
 
 //        Connection connection = factory.newConnection();

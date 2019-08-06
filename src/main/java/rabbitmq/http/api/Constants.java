@@ -4,8 +4,8 @@ package rabbitmq.http.api;
 public class Constants {
 
     //部署实例的相应ip
-
-    public static String IP = "127.0.0.1";
+    public static String IP = "192.168.1.115";
+//    public static String IP = "127.0.0.1";
 
     //端口号
     public static String PORT = "15672";
@@ -20,8 +20,12 @@ public class Constants {
     //RabbitMQ的HTTP API——获取策略信息，
     public static String RABBIT_POLICIES_REST_URL = "http://"+IP+":"+PORT+"/api/policies";
 
-    //RabbitMQ的HTTP API——获取策略信息，
+    //RabbitMQ的HTTP API——获取信道信息，
     public static String RABBIT_CHANNELS_REST_URL = "http://"+IP+":"+PORT+"/api/channels";
+
+    //RabbitMQ的HTTP API——获取信道信息，
+    public static String RABBIT_QUEUES_REST_URL = "http://"+IP+":"+PORT+"/api/queues";
+
 
     //rabbitmq的用户名
     public static String RABBIT_USER_NAME = "admin";

@@ -1,4 +1,4 @@
-package rabbitmq.http.api.two;
+package rabbitmq.http.api.test;
 
 import org.apache.commons.lang.SerializationUtils;
 

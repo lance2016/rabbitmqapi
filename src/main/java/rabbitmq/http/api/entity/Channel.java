@@ -3,28 +3,28 @@ package rabbitmq.http.api.entity;
 public class Channel {
     private String name; //   name: "192.168.1.113:54766 -> 192.168.1.115:5672 (1)"
     private String userName;  //user:admin
-    private String mode;    //不知道
+    private String mode;    //由confirm和transactional决定 ，都为false则不显示
     private String state;  //state:running
-
     private int unconfirmed; //messages_unconfirmed
-    private int prefetch; // global_prefetch_count: 0,  prefetch_count: 0,
-    private int unacked; //messages_unacknowledged: 0,
+    private int prefetch; //  对应 global_prefetch_count: 0,  prefetch_count: 0;此处新建两个变量对应
+    private int gloablePrefetch;
+    private int unacked; //messages_unacknowledged,
 
-    private int publish;  // publish: 100
-
-    private boolean confirm;    //confirm: false,
-    private double deliverGet;// deliver_get: 100,
-    private int ack;  // ack: 0
+    private double publish;  // message_stats.publish_details.rate
+    private double confirm;    //message_stats.confirm_details.rate
+    private double deliverGet;// message_stats.deliver_get_details.rate
+    private double ack;  // message_stats.ack_details.rate
 
     @Override
     public String toString() {
-        return "Channels{" +
+        return "Channel{" +
                 "name='" + name + '\'' +
                 ", userName='" + userName + '\'' +
                 ", mode='" + mode + '\'' +
                 ", state='" + state + '\'' +
                 ", unconfirmed=" + unconfirmed +
                 ", prefetch=" + prefetch +
+                ", gloablePrefetch=" + gloablePrefetch +
                 ", unacked=" + unacked +
                 ", publish=" + publish +
                 ", confirm=" + confirm +
@@ -81,6 +81,14 @@ public class Channel {
         this.prefetch = prefetch;
     }
 
+    public int getGloablePrefetch() {
+        return gloablePrefetch;
+    }
+
+    public void setGloablePrefetch(int gloablePrefetch) {
+        this.gloablePrefetch = gloablePrefetch;
+    }
+
     public int getUnacked() {
         return unacked;
     }
@@ -89,19 +97,19 @@ public class Channel {
         this.unacked = unacked;
     }
 
-    public int getPublish() {
+    public double getPublish() {
         return publish;
     }
 
-    public void setPublish(int publish) {
+    public void setPublish(double publish) {
         this.publish = publish;
     }
 
-    public boolean isConfirm() {
+    public double getConfirm() {
         return confirm;
     }
 
-    public void setConfirm(boolean confirm) {
+    public void setConfirm(double confirm) {
         this.confirm = confirm;
     }
 
@@ -113,11 +121,11 @@ public class Channel {
         this.deliverGet = deliverGet;
     }
 
-    public int getAck() {
+    public double getAck() {
         return ack;
     }
 
-    public void setAck(int ack) {
+    public void setAck(double ack) {
         this.ack = ack;
     }
 }
