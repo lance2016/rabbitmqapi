@@ -13,12 +13,13 @@ import java.io.IOException;
 
 public class Data {
     public static String getData(String url, String username, String password) throws IOException {
-        //CloseableHttpClient httpClient = HttpClients.createDefault();
-        CloseableHttpClient httpClient = HttpClientUtils.getHttpClient();
+        //CloseableHttpClient httpClient = HttpClients.createDefault(); //不使用线程池多线程下会有报错，
+        CloseableHttpClient httpClient = HttpClientUtils.getHttpClient(); //使用连接池，已加锁
         UsernamePasswordCredentials creds = new UsernamePasswordCredentials(username, password);
         HttpGet httpGet = new HttpGet(url);
         httpGet.addHeader(BasicScheme.authenticate(creds, "UTF-8", false));
         httpGet.setHeader("Content-Type", "application/json");
+
         CloseableHttpResponse response = null;
         try {
             response = httpClient.execute(httpGet);
@@ -27,7 +28,11 @@ public class Data {
         }
 
         try {
-            if (response.getStatusLine().getStatusCode() != 200) {
+            if(response == null){
+                //throw new NullPointerException("response is NULL");
+                return null;
+            }
+            if ( response.getStatusLine().getStatusCode() != 200) {
                 System.out.println("call http api to get rabbitmq data return code: " + response.getStatusLine().getStatusCode() + ", url: " + url);
             }
             HttpEntity entity = response.getEntity();
@@ -35,7 +40,8 @@ public class Data {
                 return EntityUtils.toString(entity);
             }
         } finally {
-            response.close();
+            if (response != null)
+                response.close();
         }
 
         return StringUtils.EMPTY;
