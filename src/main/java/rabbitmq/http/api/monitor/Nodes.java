@@ -2,6 +2,7 @@ package rabbitmq.http.api.monitor;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
+import rabbitmq.http.api.Constants;
 import rabbitmq.http.api.entity.ClusterStatus;
 import rabbitmq.http.api.utils.Data;
 import rabbitmq.http.api.utils.JsonUtil;
@@ -116,7 +117,7 @@ public class Nodes {
 
         //System.out.println(Nodes.getRabbtMQClusterStatus("192.168.1.116", 15672, "admin", "admin"));
 
-        final int N = 10;
+        final int N = 1;
         final CountDownLatch latch = new CountDownLatch(N);
         long start = System.currentTimeMillis();
         for(int i=0;i<N;i++)
@@ -124,7 +125,8 @@ public class Nodes {
                 @Override
                 public void run() {
                     try {
-                        System.out.println(Nodes.getRabbtMQClusterStatus("192.168.11.116", 15672, "admin", "admin"));
+                        System.out.println(Nodes.getRabbtMQClusterStatus(Constants.IP, Integer.valueOf(Constants.PORT), Constants.RABBIT_USER_NAME,
+                                Constants.RABBIT_USER_PWD));
                         latch.countDown();
                     } catch (IOException e) {
                         e.printStackTrace();

@@ -8,15 +8,14 @@ import rabbitmq.http.api.entity.Channel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static rabbitmq.http.api.utils.Methods.getData;
+import rabbitmq.http.api.utils.Data;
 
 public class ChannelsManagement {
 
     //获取Channels列表
     public static String fetchRabbitMQChannels(String url, String username, String password) throws IOException{
         //获取数据
-        String nodeData = getData(url, username, password);
+        String nodeData = Data.getData(url, username, password);
         JSONArray jsonArray = JSONObject.parseArray(nodeData) ;
         JSONArray returnJsonArray = null;
         List<Channel> channels = new ArrayList<Channel>();

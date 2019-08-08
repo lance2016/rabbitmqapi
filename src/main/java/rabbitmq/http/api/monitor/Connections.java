@@ -1,6 +1,7 @@
 package rabbitmq.http.api.monitor;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import rabbitmq.http.api.Constants;
 import rabbitmq.http.api.entity.ConnectionsStatus;
 import rabbitmq.http.api.utils.Data;
 import rabbitmq.http.api.utils.JsonUtil;
@@ -65,7 +66,8 @@ public class Connections {
     }
 
     public static void main(String[] args) throws IOException {
-        String str = getConnectionsStatus("192.168.11.115", 15672, "admin", "admin");
+        String str = getConnectionsStatus(Constants.IP, Integer.valueOf(Constants.PORT), Constants.RABBIT_USER_NAME,
+                Constants.RABBIT_USER_PWD);
         System.out.println(str);
     }
 }

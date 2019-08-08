@@ -1,6 +1,7 @@
 package rabbitmq.http.api.monitor;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import rabbitmq.http.api.Constants;
 import rabbitmq.http.api.entity.IndexStatus;
 import rabbitmq.http.api.utils.Data;
 import rabbitmq.http.api.utils.JsonUtil;
@@ -86,7 +87,8 @@ public class Overview {
     }
 
     public static void main(String[] args) throws IOException {
-        String s = getOverviewStatus("192.168.100.115", 15672, "admin", "admin");
+        String s = getOverviewStatus(Constants.IP, Integer.valueOf(Constants.PORT), Constants.RABBIT_USER_NAME,
+                Constants.RABBIT_USER_PWD);
         System.out.println(s);
     }
 }

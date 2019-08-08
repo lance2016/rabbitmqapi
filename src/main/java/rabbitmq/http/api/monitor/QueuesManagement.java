@@ -5,19 +5,19 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import rabbitmq.http.api.Constants;
 import rabbitmq.http.api.entity.Queue;
+import rabbitmq.http.api.utils.Data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static rabbitmq.http.api.utils.Methods.getData;
 
 public class QueuesManagement {
     //获取Channels列表
     public static String fetchRabbitMQQueues(String url, String username, String password) throws IOException {
         //获取数据
-        String nodeData = getData(url, username, password);
+        String nodeData = Data.getData(url, username, password);
         JSONArray jsonArray = JSONObject.parseArray(nodeData) ;
         JSONArray returnJsonArray = null;
         List<Queue> queues = new ArrayList<Queue>();
