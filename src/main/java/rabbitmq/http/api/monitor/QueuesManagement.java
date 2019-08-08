@@ -3,10 +3,8 @@ package rabbitmq.http.api.monitor;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.JsonNode;
 import rabbitmq.http.api.Constants;
 import rabbitmq.http.api.entity.Queue;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -93,7 +91,6 @@ public class QueuesManagement {
     public static void main(String[] args) throws IOException {
         String ss = fetchRabbitMQQueues(Constants.RABBIT_QUEUES_REST_URL,Constants.RABBIT_USER_NAME,
                 Constants.RABBIT_USER_PWD);
-        //输出获取到的字符串
-//        System.out.println(ss);
+
     }
 }
