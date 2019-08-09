@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import rabbitmq.http.api.utils.Data;
 
-public class ChannelsManagement {
+public class Channels {
 
     //获取Channels列表
     public static String fetchRabbitMQChannels(String url, String username, String password) throws IOException{
@@ -24,29 +24,44 @@ public class ChannelsManagement {
             JSONObject tempJsonObject = jsonArray.getJSONObject(i);
             Channel channel = new Channel();
             //赋值
-            channel.setName(tempJsonObject.getString("name"));
-            channel.setUserName(tempJsonObject.getString("user"));
+            if(tempJsonObject.getString("name")!=null)
+                channel.setName(tempJsonObject.getString("name"));
+            if(tempJsonObject.getString("user")!=null)
+                channel.setUserName(tempJsonObject.getString("user"));
 
-            boolean confirm = tempJsonObject.getBoolean("confirm");
-            boolean transactional = tempJsonObject.getBoolean("transactional");
-            String mode = "";
-            if(confirm)
-                mode = "confirm";
-            else if(transactional)
-                mode ="transactional";
-            channel.setMode(mode);
+            if(tempJsonObject.getBoolean("confirm")!=null && tempJsonObject.getBoolean("transactional")!=null){
+                boolean confirm = tempJsonObject.getBoolean("confirm");
+                boolean transactional = tempJsonObject.getBoolean("transactional");
+                String mode = "";
+                if(confirm)
+                    mode = "confirm";
+                else if(transactional)
+                    mode ="transactional";
+                channel.setMode(mode);
+            }
 
-            channel.setState(tempJsonObject.getString("state"));
+            if(tempJsonObject.getString("state")!=null)
+                channel.setState(tempJsonObject.getString("state"));
 
-            channel.setUnconfirmed(tempJsonObject.getInteger("messages_unconfirmed"));
+
+            if(tempJsonObject.getInteger("messages_unconfirmed")!=null)
+                channel.setUnconfirmed(tempJsonObject.getInteger("messages_unconfirmed"));
 
             int global_prefetch_count,prefetch_count;
-            global_prefetch_count = tempJsonObject.getInteger("global_prefetch_count");
-            prefetch_count = tempJsonObject.getInteger("prefetch_count");
-            channel.setPrefetch(prefetch_count);
-            channel.setGloablePrefetch(global_prefetch_count);
+            if(tempJsonObject.getInteger("global_prefetch_count")!=null){
+                global_prefetch_count = tempJsonObject.getInteger("global_prefetch_count");
+                channel.setGloablePrefetch(global_prefetch_count);
+            }
 
-            channel.setUnacked(Integer.parseInt(tempJsonObject.getString("messages_unacknowledged")));
+            if(tempJsonObject.getInteger("prefetch_count")!=null){
+                prefetch_count = tempJsonObject.getInteger("prefetch_count");
+                channel.setPrefetch(prefetch_count);
+            }
+
+            if(tempJsonObject.getString("messages_unacknowledged")!=null){
+                channel.setUnacked(Integer.parseInt(tempJsonObject.getString("messages_unacknowledged")));
+            }
+
 
             String message_stats = tempJsonObject.getString("message_stats");
             if(message_stats!=null){

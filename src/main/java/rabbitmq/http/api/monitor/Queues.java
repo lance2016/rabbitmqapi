@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class QueuesManagement {
+public class Queues {
     //获取Channels列表
     public static String fetchRabbitMQQueues(String url, String username, String password) throws IOException {
         //获取数据
@@ -27,15 +27,17 @@ public class QueuesManagement {
 
             Queue queue = new Queue();
             //赋值
-            queue.setName(tempJsonObject.getString("name"));
+            if(tempJsonObject.getString("name")!=null)
+                queue.setName(tempJsonObject.getString("name"));
 
-            queue.setPolicy(tempJsonObject.getString("policy"));
+            if(tempJsonObject.getString("policy")!=null)
+                queue.setPolicy(tempJsonObject.getString("policy"));
 
             if(tempJsonObject.getString("message_stats")!=null){
                 String message_stats = tempJsonObject.getString("message_stats");
 
                 JSONObject json_message_stats = JSONObject.parseObject(message_stats);
-                if(json_message_stats.getString("ack_details")==null){
+                if(json_message_stats.getString("ack_details")!=null){
                     String ack_details = json_message_stats.getString("ack_details");
                     JSONObject json_ack_details = JSONObject.parseObject(ack_details);
                     if(json_ack_details.getDouble("rate")!=null)

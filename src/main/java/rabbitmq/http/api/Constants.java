@@ -5,7 +5,7 @@ public class Constants {
 
     //部署实例的相应ip
     public static String IP = "192.168.1.115";
-//    public static String IP = "127.0.0.1";
+
 
     //端口号
     public static String PORT = "15672";
@@ -14,7 +14,7 @@ public class Constants {
     public static String RABBIT_NODES_STATUS_REST_URL = "http://"+IP+":"+PORT+"/api/nodes";
 
 
-    //RabbitMQ的HTTP API——获取集群用户信息，ip替换为自己部署相应实例的
+    //RabbitMQ的HTTP API——获取集群用户信息
     public static String RABBIT_USERS_REST_URL = "http://"+IP+":"+PORT+"/api/users";
 
     //RabbitMQ的HTTP API——获取策略信息，
@@ -23,7 +23,7 @@ public class Constants {
     //RabbitMQ的HTTP API——获取信道信息，
     public static String RABBIT_CHANNELS_REST_URL = "http://"+IP+":"+PORT+"/api/channels";
 
-    //RabbitMQ的HTTP API——获取信道信息，
+    //RabbitMQ的HTTP API——获取队列信息，
     public static String RABBIT_QUEUES_REST_URL = "http://"+IP+":"+PORT+"/api/queues";
 
 
